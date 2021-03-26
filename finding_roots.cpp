@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include <climits>
 #include <cmath>
 #include <utility>
@@ -7,28 +8,26 @@ template <class T>
 
 // Put value of x in equation
 long double getVal(T x) {
-  /**
-   * Chapter 2 Example 1
-   * a = .5
-   * b = 9
-   * eqn => e^(ax) - ax - b = 0
-   */
-  return (exp(.5 * x) - (.5 * x) - 9);
+  return (x - (.2 * sin(x)) - .5);
 } 
 
-std::pair<int, int> getInterval() {
+std::vector<std::pair<int, int>> getInterval() {
   int min{ -10 };
   int max {};
-  while(true) {
+  std::vector<std::pair<int, int>> res;
+  bool currentPositive = false;
+  while(min <= 10) {
     long double fx = getVal(min);
-    if (fx > 0) {
+    if (currentPositive != (fx > 0)) {
       max = min--;
-      break;
+      res.push_back(std::make_pair(min, max));
+      min += 2;
+      currentPositive = !currentPositive;
     } else {
       ++min;
     }
   }
-  return std::make_pair(min, max);
+  return res;
 }
 
 
@@ -41,7 +40,7 @@ double bisection(int x, int y) {
   while(intMin < intMax || i > 500) {
     double xmid = ((intMin + intMax) / 2);
     long double val = getVal(xmid);
-    std::cout << "Val : " << val << ", Last Val : " << lastVal << std::endl;
+    // std::cout << "Val : " << val << ", Last Val : " << lastVal << std::endl;
     if (val == lastVal) {
       std::cout <<  "Root found in : " << i + 1 << " iteration" << std::endl;
       return xmid;
@@ -55,6 +54,6 @@ double bisection(int x, int y) {
     }
     ++i;
   }
-  std::cout << "No root found !!!!";
+  std::cout << "No root found !!!! Iterations ran : " << i << std::endl;
   return 0.0;
 }

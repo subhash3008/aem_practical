@@ -2,9 +2,10 @@
 #define FINDING_ROOTS_H
 
 #include <utility>
+#include <vector>
 
 long double getVal(int);
-std::pair<int, int> getInterval();
+std::vector<std::pair<int, int>> getInterval();
 double bisection(int, int);
 
 #endif

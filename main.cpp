@@ -2,9 +2,11 @@
 #include "finding_roots.h"
 
 int main() {
-  std::pair<int, int> ab{ getInterval() };
-  std::cout << "Interval >>>> " << ab.first << " , " << ab.second << std::endl;
-  double root{ bisection(ab.first, ab.second) };
-  std::cout << "Root is " << root;
+  std::vector<std::pair<int, int>> intervals{ getInterval() };
+  for( auto interval: intervals) {
+    std::cout << "Interval >>>> " << interval.first << " , " << interval.second << std::endl;
+    double root{ bisection(interval.first, interval.second) };
+    std::cout << "Root is " << root << std::endl;
+  }
   return 0;
 }
