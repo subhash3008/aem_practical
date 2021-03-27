@@ -8,7 +8,7 @@ template <class T>
 
 // Put value of x in equation
 long double getVal(T x) {
-  return (x - (.2 * sin(x)) - .5);
+  return (exp(.5 * x) - (.5 * x) - 9);
 } 
 
 std::vector<std::pair<int, int>> getInterval() {
@@ -42,7 +42,7 @@ double bisection(int x, int y) {
     long double val = getVal(xmid);
     // std::cout << "Val : " << val << ", Last Val : " << lastVal << std::endl;
     if (val == lastVal) {
-      std::cout <<  "Root found in : " << i + 1 << " iteration" << std::endl;
+      std::cout << "Root found in : " << i + 1 << " iteration" << std::endl;
       return xmid;
     } else {
       lastVal = val;
@@ -52,6 +52,56 @@ double bisection(int x, int y) {
     } else {
       intMin = xmid;
     }
+    ++i;
+  }
+  std::cout << "No root found !!!! Iterations ran : " << i << std::endl;
+  return 0.0;
+}
+
+// Finding roots of an equation using secant method
+double getSecantVal(double xprev, double xcurr) {
+  return (((xprev * getVal(xcurr)) - (xcurr * getVal(xprev))) / (getVal(xcurr) - getVal(xprev)));
+}
+
+double secant(int a, int b) {
+  double xprev{ a + 0.0 };
+  double xcurr{ b + 0.0};
+  int i{ 0 };
+  while(i < 500) {
+    double xnext{ getSecantVal(xprev, xcurr) };
+    // std::cout << "Next value of x : " << xnext << std::endl;
+    if (xnext == xcurr) {
+      std::cout << "Secant Root found in : " << i + 1 << " iteration" << std::endl;
+      return xnext;
+    } else {
+      xprev = xcurr;
+      xcurr = xnext;
+    }
+    ++i;
+  }
+  std::cout << "No root found !!!! Iterations ran : " << i << std::endl;
+  return 0.0;
+}
+
+// Finding Root with Newton method
+double getDerivedVal(double x) {
+  return ((.5 * exp(.5 * x)) - .5);
+} 
+
+double getNewtonVal(double xcurr) {
+  return (xcurr - (getVal(xcurr) / getDerivedVal(xcurr)));
+}
+
+double newton(int min, int max) {
+  double xcurr = (static_cast<double>(min + max) / 2);
+  int i{ 0 };
+  while (i < 500) {
+    double xnext{ getNewtonVal(xcurr) };
+    if (xnext == xcurr) {
+      std::cout << "Newton Root found in : " << i + 1 << " iteration" << std::endl;
+      return xnext;
+    }
+    xcurr = xnext;
     ++i;
   }
   std::cout << "No root found !!!! Iterations ran : " << i << std::endl;

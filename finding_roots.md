@@ -3,6 +3,15 @@
   b = 9
   eqn => e^(ax) - ax - b = 0
   return (exp(.5 * x) - (.5 * x) - 9);
+  For newton derived val:
+  return ((.5 * exp(.5 * x)) - .5);
+  O/P:
+  Root found in : 52 iteration
+  Root is 4.87368
+  Secant Root found in : 7 iteration
+  Secant root is 4.87368
+  Newton Root found in : 6 iteration
+  Newton root is 4.87368
 
 * Chapter 2.1 Q 3
   i. x^3 − 3x − 5 = 0
