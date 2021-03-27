@@ -8,7 +8,7 @@ template <class T>
 
 // Put value of x in equation
 long double getVal(T x) {
-  return (exp(.5 * x) - (.5 * x) - 9);
+    return (pow(x, 2) - (10 * log(x)));
 } 
 
 std::vector<std::pair<int, int>> getInterval() {
@@ -71,7 +71,7 @@ double regulaFalsi(int a, int b) {
   int i{ 0 };
   double x{ a + 0.0 };
   double y{ b + 0.0 };
-  while(i < 500) {
+  while(i < 5000) {
     double valNext{ getRegulaFalsiVal(x, y) };
     if((evalA && (valNext == x)) || (!evalA && (valNext == y))) {
       std::cout << "Regula Falsi Root found in : " << i + 1 << " iteration" << std::endl;
@@ -115,7 +115,7 @@ double secant(int a, int b) {
 
 // Finding Root with Newton method
 double getDerivedVal(double x) {
-  return ((.5 * exp(.5 * x)) - .5);
+    return ((2 * x) - (10 / x));
 } 
 
 double getNewtonVal(double xcurr) {
