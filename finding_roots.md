@@ -6,8 +6,11 @@
   For newton derived val:
   return ((.5 * exp(.5 * x)) - .5);
   O/P:
+  Interval >>>> 4 , 5
   Root found in : 52 iteration
   Root is 4.87368
+  Regula Falsi Root found in : 12 iteration
+  Regula Falsi Root is 4.87368
   Secant Root found in : 7 iteration
   Secant root is 4.87368
   Newton Root found in : 6 iteration

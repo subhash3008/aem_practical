@@ -58,6 +58,36 @@ double bisection(int x, int y) {
   return 0.0;
 }
 
+// Finding roots of an equation using regula falsi method
+double getRegulaFalsiVal(double a, double b) {
+  return (((a * getVal(b)) - (b * getVal(a))) / (getVal(b) - getVal(a)));
+}
+
+double regulaFalsi(int a, int b) {
+  bool evalA = true;
+  if (getVal(b) < 0) {
+    evalA = false;
+  }
+  int i{ 0 };
+  double x{ a + 0.0 };
+  double y{ b + 0.0 };
+  while(i < 500) {
+    double valNext{ getRegulaFalsiVal(x, y) };
+    if((evalA && (valNext == x)) || (!evalA && (valNext == y))) {
+      std::cout << "Regula Falsi Root found in : " << i + 1 << " iteration" << std::endl;
+      return valNext;
+    }
+    if (evalA) {
+      x = valNext;
+    } else {
+      y = valNext;
+    }
+    ++i;
+  }
+  std::cout << "No root found !!!! Iterations ran : " << i << std::endl;
+  return 0.0;
+}
+
 // Finding roots of an equation using secant method
 double getSecantVal(double xprev, double xcurr) {
   return (((xprev * getVal(xcurr)) - (xcurr * getVal(xprev))) / (getVal(xcurr) - getVal(xprev)));
